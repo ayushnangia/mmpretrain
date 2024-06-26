@@ -3,6 +3,15 @@ _base_ = [
     '../_base_/datasets/imagenet_bs512_mae.py',
     '../_base_/default_runtime.py',
 ]
+train_dataloader = dict(
+    dataset=dict(
+        type='CustomDataset',
+        data_root='/workspace/Dest/train/',
+        ann_file='',       # We assume you are using the sub-folder format without ann_file
+        data_prefix='',    # The `data_root` is the data_prefix directly.
+        with_label=False,
+    )
+)
 
 # model settings
 model = dict(
