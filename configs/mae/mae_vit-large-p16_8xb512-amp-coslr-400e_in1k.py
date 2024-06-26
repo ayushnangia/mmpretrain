@@ -5,7 +5,7 @@ _base_ = [
 ]
 
 dataset_type = 'CustomDataset'
-data_root = '/workspace/Dest/train/'
+data_root = '/workspace/Dest/train'
 data_preprocessor = dict(
     type='SelfSupDataPreprocessor',
     mean=[123.675, 116.28, 103.53],
