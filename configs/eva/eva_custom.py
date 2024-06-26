@@ -1,22 +1,41 @@
 _base_ = [
     '../_base_/models/mae_vit-base-p16.py',
-    '../_base_/datasets/imagenet_bs512_mae.py',
+  #  '../_base_/datasets/imagenet_bs512_mae.py',
     '../_base_/default_runtime.py',
 ]
 
 
 
+dataset_type = 'CustomDataset'
+data_root = '/workspace/Dest'
+data_preprocessor = dict(
+    type='SelfSupDataPreprocessor',
+    mean=[123.675, 116.28, 103.53],
+    std=[58.395, 57.12, 57.375],
+    to_rgb=True)
 
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='RandomResizedCrop',
+        scale=224,
+        crop_ratio_range=(0.2, 1.0),
+        backend='pillow',
+        interpolation='bicubic'),
+    dict(type='RandomFlip', prob=0.5),
+    dict(type='PackInputs')
+]
 
 train_dataloader = dict(
+    batch_size=32,
+    num_workers=2,
+    persistent_workers=True,
+    sampler=dict(type='DefaultSampler', shuffle=True),
+    collate_fn=dict(type='default_collate'),
     dataset=dict(
-        type='CustomDataset',
-        data_root='/workspace/Dest/train/',
-        ann_file='',       # We assume you are using the sub-folder format without ann_file
-        data_prefix='',    # The `data_root` is the data_prefix directly.
-        with_label=False,
-    )
-)
+        type=dataset_type,
+        data_root=data_root,
+        pipeline=train_pipeline))
 
 
 
