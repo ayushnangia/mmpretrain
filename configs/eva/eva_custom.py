@@ -11,11 +11,7 @@ _base_ = [
 
 dataset_type = 'CustomDataset'
 data_root = '/workspace/Dest/'
-data_preprocessor = dict(
-    type='SelfSupDataPreprocessor',
-    mean=[123.675, 116.28, 103.53],
-    std=[58.395, 57.12, 57.375],
-    to_rgb=True)
+
 
 train_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -42,11 +38,13 @@ train_dataloader = dict(
     sampler=dict(type='DefaultSampler', shuffle=True),
     collate_fn=dict(type='default_collate'),
     dataset=dict(
-        type=dataset_type,
-        data_root=data_root,
-        # ann_file='meta/train.txt', # removed if you don't have the annotation file
-        data_prefix=dict(img_path='./'),
-        pipeline=train_pipeline))
+        type='CustomDataset',
+        data_root='data/custom_dataset/',
+        ann_file='',       # We assume you are using the sub-folder format without ann_file
+        data_prefix='',    # The `data_root` is the data_prefix directly.
+        with_label=False,
+    )
+)
 
 # model settings
 model = dict(
