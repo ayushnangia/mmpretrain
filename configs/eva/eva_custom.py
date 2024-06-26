@@ -9,7 +9,7 @@ _base_ = [
 
 
 
-dataset_type = 'mmcls.CustomDataset'
+dataset_type = 'CustomDataset'
 data_root = '/workspace/Dest/'
 data_preprocessor = dict(
     type='SelfSupDataPreprocessor',
