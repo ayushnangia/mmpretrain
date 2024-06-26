@@ -32,7 +32,6 @@ train_dataloader = dict(
     collate_fn=dict(type='default_collate'),
     dataset=dict(
         type=dataset_type,
-        data_prefix=dict(img=''),
         data_root=data_root,
         pipeline=train_pipeline))
 
