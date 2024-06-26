@@ -8,7 +8,7 @@ train_dataloader = dict(
         type='CustomDataset',
         data_root='/workspace/Dest/train/',
         ann_file='',       # We assume you are using the sub-folder format without ann_file
-        data_prefix=dict(img='')   # The `data_root` is the data_prefix directly.
+        data_prefix=dict(img=''),   # The `data_root` is the data_prefix directly.
         with_label=False,
     )
 )
