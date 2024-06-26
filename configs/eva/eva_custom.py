@@ -29,7 +29,18 @@ train_pipeline = [
 
 
 # dataset settings
-train_dataloader = dict(batch_size=32)
+train_dataloader = dict(
+    batch_size=32,
+    num_workers=2,
+    persistent_workers=True,
+    sampler=dict(type='DefaultSampler', shuffle=True),
+    collate_fn=dict(type='default_collate'),
+    dataset=dict(
+        type=dataset_type,
+        data_root=data_root,
+        # ann_file='meta/train.txt', # removed if you don't have the annotation file
+        data_prefix=dict(img_path='./'),
+        pipeline=train_pipeline))
 
 # model settings
 model = dict(
