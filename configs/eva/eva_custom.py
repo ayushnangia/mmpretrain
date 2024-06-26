@@ -39,7 +39,7 @@ train_dataloader = dict(
     collate_fn=dict(type='default_collate'),
     dataset=dict(
         type='CustomDataset',
-        data_root='data/custom_dataset/',
+        data_root='/worspace/Dest/',
         ann_file='',       # We assume you are using the sub-folder format without ann_file
         data_prefix='',    # The `data_root` is the data_prefix directly.
         with_label=False,
